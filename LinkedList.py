@@ -127,7 +127,20 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
         else:
             self.head = curr_1
 
-        curr_1.next, curr_2.next = curr_2.next, curr_1.next        
+        curr_1.next, curr_2.next = curr_2.next, curr_1.next
+
+    def reverse_iterative(self):
+
+        curr_node = self.head
+        prev = None
+
+        while curr_node:
+            nxt = curr_node.next
+            curr_node.next = prev
+            prev = curr_node
+            cur = nxt
+        self.head = prev
+
         
 
 
@@ -138,8 +151,8 @@ ll.push("C")
 ll.push("D")
 # ll.prepend("T")
 # ll.insert_after_node(ll.head.next, "L")
-ll.print()
-
+# ll.print()
+# ll.reverse_iterative()
 ll.node_swap("A", "D")
 
 # ll.delete_by_pos(5)
