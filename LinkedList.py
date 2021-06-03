@@ -128,6 +128,12 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
             self.head = curr_1
 
         curr_1.next, curr_2.next = curr_2.next, curr_1.next
+    
+    def print_helper(self, node, name):
+        if node is None:
+            print(name + ": None")
+        else:
+            print(name + ":" + node.data)
 
     def reverse_iterative(self):
 
@@ -136,27 +142,90 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
 
         while curr_node:
             nxt = curr_node.next
-            curr_node.next = prev
+            curr_node.next = prev                           #A -> B -> C -> D -> 0 
+                                                            #A <- B <- C <- D <- 0
+            self.print_helper(curr_node, "CURR")
+            self.print_helper(nxt, "NXT")
+            self.print_helper(prev, "PREV")
+
             prev = curr_node
-            cur = nxt
+            curr_node = nxt
         self.head = prev
+
+    def merge_sorted(self, llist):
+        p = self.head
+        q = llist.head
+        s = None
+
+        if not p:
+            return q
+        if not q:
+            return p
+        
+        if p and q:
+            if p.data <= q.data:
+                s = p
+                p = s.next
+            else:
+                s = q
+                q = s.next
+
+            new_head = s
+
+        while p and q:
+            if p.data <= q.data:
+                s.next = p
+                s = p
+                p = s.next
+            else:
+                s.next = q
+                s = q
+                q = s.next
+                
+        if not p:
+            s.next = q
+        if not q:
+            s.next = p
+        return new_head
+
+
 
         
 
 
-ll = LinkedList()
-ll.push("A")
-ll.push("B")
-ll.push("C")
-ll.push("D")
+ll_1 = LinkedList()
+ll_2 = LinkedList()
+ll_1.push("1")
+ll_1.push("3")
+ll_1.push("5")
+ll_1.push("6")
+ll_1.push("8")
+
+
+
+
+
+ll_2.push("2")
+ll_2.push("4")
+ll_2.push("6")
+ll_2.push("7")
+ll_2.push("9")
+ll_2.push("16")
+
+
+ll_1.merge_sorted(ll_2)
+
+ll_1.print()
+
+
 # ll.prepend("T")
 # ll.insert_after_node(ll.head.next, "L")
 # ll.print()
 # ll.reverse_iterative()
-ll.node_swap("A", "D")
+# ll.node_swap("A", "D")
 
 # ll.delete_by_pos(5)
 # ll.length()
-ll.print()
+# ll.print()
 
         
