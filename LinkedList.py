@@ -188,34 +188,35 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
             s.next = p
         return new_head
 
+    def remove_duplicates(self):
+        cur = self.head
+        prev = None
+        dup_vals = dict()
+
+        while cur:
+            if cur.data in dup_vals:
+                prev.next = cur.next
+                cur = None                    # 1 -> 2 -> 6 -> 2 -> 5 -> 6 -> 0
+            else:                             # 1 -> 2 -> 6 -> 5 -> 0
+                dup_vals[cur.data] = 1
+                prev = cur
+            cur = prev.next
 
 
         
 
 
-ll_1 = LinkedList()
-ll_2 = LinkedList()
-ll_1.push("1")
-ll_1.push("3")
-ll_1.push("5")
-ll_1.push("6")
-ll_1.push("8")
+ll = LinkedList()
+ll.push("1")
+ll.push("2")
+ll.push("6")
+ll.push("2")
+ll.push("5")
+ll.push("6")
 
+ll.remove_duplicates()
 
-
-
-
-ll_2.push("2")
-ll_2.push("4")
-ll_2.push("6")
-ll_2.push("7")
-ll_2.push("9")
-ll_2.push("16")
-
-
-ll_1.merge_sorted(ll_2)
-
-ll_1.print()
+ll.print()
 
 
 # ll.prepend("T")
