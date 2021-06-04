@@ -89,7 +89,7 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
 
     def length(self):
         cur_node = self.head
-        count = 0
+        count = 1
 
         while cur_node:
             count+=1
@@ -203,20 +203,42 @@ class LinkedList():                                     # A -> B -> C -> D -> 0
             cur = prev.next
 
 
-        
+    def nth_to_last(self, n):
 
+        cur = self.head
+        count = 1
+        while cur and count != n:
+            cur = cur.next
+            count += 1 
+        
+        if cur is None:
+            return
+        
+        print(cur.data)
+        return cur.data
+
+    def count_occurunces(self, data):
+        cur = self.head
+        count = 0
+
+        while cur:
+            if cur.data == data:
+                count += 1
+            cur = cur.next
+        print(count)
+        return count
 
 ll = LinkedList()
 ll.push("1")
 ll.push("2")
-ll.push("6")
+ll.push("3")
+ll.push("1")
+ll.push("1")
 ll.push("2")
-ll.push("5")
-ll.push("6")
 
-ll.remove_duplicates()
-
-ll.print()
+ll.count_occurunces("2")
+# ll.nth_to_last(6)
+# ll.print()
 
 
 # ll.prepend("T")
