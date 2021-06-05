@@ -53,6 +53,39 @@ class BST(object):
         else:
             return None
 
+    def _inorder_print(self, cur_node):
+        if cur_node:
+            self._inorder_print(cur_node.left)
+            print(str(cur_node.data))
+            self._inorder_print(cur_node.right)
+
+    def inorder_print(self):
+        if self.root:
+            self._inorder_print(self.root)
+
+    def _is_bst_satisfied(self, cur_node, data):
+        if cur_node.left:
+            if data > cur_node.left.data:
+                return self._is_bst_satisfied(cur_node.left, cur_node.left.data)
+            else:
+                return False
+        
+        if cur_node.right:
+            if data < cur_node.right.data:
+                return self._is_bst_satisfied(cur_node.right, cur_node.right.data)
+            else:
+                return False
+
+
+
+    def is_bst_satisfied(self):
+        if self.root:
+            is_satisfied = self._is_bst_satisfied(self.root, self.root.data)
+            if is_satisfied is None:
+                return True
+            return False
+
+        return True
 
         
 tree = BST()
@@ -63,4 +96,6 @@ tree.insert(7)
 tree.insert(1)
 tree.insert(3)
 
-print(tree.find(10))
+print(tree.is_bst_satisfied())
+# print(tree.find(10))
+# print(tree.inorder_print())
